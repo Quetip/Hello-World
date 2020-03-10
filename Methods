@@ -1,0 +1,80 @@
+package com.company.Practise;
+
+import com.sun.source.tree.CompilationUnitTree;
+import org.w3c.dom.ls.LSOutput;
+
+import java.sql.SQLOutput;
+import java.util.Random;
+import java.util.Scanner;
+
+class Hangman {
+    int guess = 0;
+    boolean gameOn() {
+        guess += 1;
+        return true;
+    }
+
+//    public void Word() {
+//        Scanner keyboard = new Scanner(System.in);
+//        String word = keyboard.nextLine();
+//        int i = 0;
+//        if () {
+//            i++;
+//
+//        }
+//    }
+
+    public void printStatus() {
+
+        if (guess == 0) {
+            System.out.println("You have not made any guesses yet.");
+        } else {
+            System.out.println("You have made " + guess + " guesses");
+        }
+        System.out.println("Unused letters: abcdefghijklmnopqrstuvwxyz");
+    }
+
+    public void guess(String command) {
+
+        String t = "?", e = "?", s = "?";
+        String word = t + e + s + t;
+//        int i = 0;
+
+        if (command.contains("t")) {
+            word = word.replace(t, "t"); //replace letters with '?'
+        }
+        if (command.equals("e")) {
+            e = command.replace("?", command); //replace letters with '?'
+        }
+        System.out.println(word);
+        System.out.println("the letter " + command + " is not in the word.");
+    }
+
+    public void printMan() {
+        System.out.println(" _____");
+        System.out.print(" |");
+        System.out.println();
+        System.out.println(" |");
+        System.out.println(" |");
+        System.out.println(" |");
+        System.out.println("/|\\");
+    }
+
+    public void printWord(String command) {
+
+
+        Random randomWordSelector = new Random();
+
+
+        final String[] word = new String[]{"test", "rest", "chest"}; //array
+        int i = randomWordSelector.nextInt(word.length); //select a word in the array
+
+
+        word[i] = word[i].replaceAll(".",  "?"); //replace letters with '?'
+         //matching a letter in a string
+
+        for (char ch : word[i].toCharArray()) {
+            System.out.print(ch);
+        }
+    }
+}
