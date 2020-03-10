@@ -18,7 +18,6 @@ public class HangmanGame {
 
         int guesses = 0;
         while (hangman.gameOn()) {
-            String winnie ="the pooh";
             System.out.println();
             System.out.println("Type a command:");
             String command = reader.nextLine();
@@ -27,6 +26,7 @@ public class HangmanGame {
                 hangman.printStatus();
             }
             if (command.isEmpty()) {
+                System.out.println("String was empty");
                 printMenu();
             } else {
                 System.out.println("I found something!");
@@ -39,7 +39,7 @@ public class HangmanGame {
                 return;
             }
             hangman.printMan();
-            hangman.printWord();
+            hangman.printWord(command);
         }
     }
 
@@ -52,3 +52,4 @@ public class HangmanGame {
         System.out.println("an empty line prints this menu");
     }
 }
+
