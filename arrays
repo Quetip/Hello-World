@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int mainffd() {
+
+	int array[50], count = 0;
+
+	printf("Type in a number: \n");
+
+	for (int i = 0; i < 50; i++) {
+		scanf_s("%d", &array[i]);
+
+		if (array[i] == -999 || array[i] == 50) {
+
+			for (int i = 0; i < 50; i++) {
+
+				if (array[i] == -999) {
+					system("pause");
+				}
+
+				count++;
+				printf("%i: %d\n", count, array[i]);
+			}
+		}
+	}
+
+	for (int i = 0; i < 50; i++) {
+		array[i];
+		count++;
+		printf("%i: %d\n", count, array[i]);
+	}
+
+	system("pause");
+}
