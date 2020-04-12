@@ -1,0 +1,53 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int calculateFahrenheit(int degrees) {//set up function for celcius conversion
+
+	int celcius = (5 / 9) * (degrees - 32);
+	//(9 / 5)* C + 32;
+	return celcius;
+}
+
+int calculateCelcius(int degrees) {//set up function for fahrenheit conversion
+	int fahrenheit = (9 / 5) * degrees + 32;
+	return fahrenheit;
+}
+
+int main() {
+
+	int input = 0, temperature= 0;
+
+	int farenheitToCelcius = calculateFahrenheit(temperature);
+	int celciusToFahrenheit = calculateCelcius(temperature);
+
+	printf("Enter temperature: ");//decided to ask user this first then run variable through cases. Seems to make more sense.
+	scanf_s("%i", &temperature);
+
+
+	printf("\n\n1: Convert temperature input from the user in degrees Fahrenheit to degrees Celsius.\n");//ask our user which to convert too.
+	printf("2: Convert temperature input from the user in degrees Celsius to degrees Fahrenheit.\n");
+	printf("3: Quit.\n");
+
+	scanf_s("%i", &input);
+
+	switch (input) {//enter our switch function
+		case 1:
+			printf("\n%i", farenheitToCelcius);//print if in celcius
+			printf(" degrees Celcius.\n");
+			break;
+		case 2:
+			printf("\n%i", celciusToFahrenheit);//print if in fahrenheit
+			printf(" degrees Fahrenheit.\n");
+			break;
+		case 3:
+			exit(0);
+		default: 
+			exit(0);
+			break;
+	}
+
+	return 0;
+	system("pause");
+
+}
