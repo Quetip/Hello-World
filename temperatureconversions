@@ -1,0 +1,70 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+//function to conver the temperature that is passed as an argument in each scenario
+double calculateCelcius(double degrees) {//set up function for celcius conversion
+
+	double celcius;
+	celcius = ((double)5 / 9) * (degrees - 32);//casting the fraction to avoid getting a 0 result
+	return celcius;
+}
+
+double calculateFahrenheit(double degrees) {//set up function for fahrenheit conversion
+	double fahrenheit = ((double)9 / 5) * degrees + 32;//shortened the initialization of the variable
+	return fahrenheit;
+}
+
+int maintemp() {
+
+	int input = 0, count = 0;//kept int for switch input
+	double temperature = 0;//used double to get a more accurate answer. Using int might return 0
+
+	do {
+		//function to ask for temperature in each scenario
+		printf("Enter temperature: ");//decided to ask user this first then run variable through cases. Seems to make more sense.
+		scanf_s("%lf", &temperature);
+		//function for menu operation
+		printf("\n1: Convert temperature input from the user in degrees Fahrenheit to degrees Celsius.\n");//ask our user which to convert too.
+		printf("2: Convert temperature input from the user in degrees Celsius to degrees Fahrenheit.\n");
+		printf("3: Quit.\n");
+
+		scanf_s("%i", &input);
+		
+		switch (input) {//enter our switch function
+			
+			case 1:
+				//function to display converted temperature in each scenario
+				int fahrenheitToCelcius = calculateCelcius(temperature);//had to initialize variable in the switch case to avoid a wrong number returning
+				printf("\n%i", fahrenheitToCelcius);//changed the double answer to an int to keep it as standard answer
+				printf(" degrees Celcius.\n\n");
+				break;
+
+			case 2:
+				int celciusToFahrenheit = calculateFahrenheit(temperature);
+				printf("\n%i", celciusToFahrenheit);//print if in fahrenheit
+				printf(" degrees Fahrenheit.\n\n");
+				break;
+
+			case 3:
+				//bonus function point: count how many conversions you do (excludes wrong inputs and exit case):
+				printf("\nNumber of conversions: %i\n", count);
+				system("pause");
+				exit(0);
+
+			default:
+				printf("Invalid input");
+				count--;
+				printf("\n\n");
+				break;
+
+		}
+		//bonus count
+		count++;
+
+	} while (input != 3);//while loop and condition to exit to loop if false
+
+	return 0;
+	system("pause");
+
+}
+
