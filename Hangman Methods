@@ -1,53 +1,101 @@
 package com.company.Practise;
 
-import com.sun.source.tree.CompilationUnitTree;
-import org.w3c.dom.ls.LSOutput;
-
-import java.sql.SQLOutput;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Arrays;
 
 class Hangman {
     int guess = 0;
+    String guessLetter;
     boolean gameOn() {
         guess += 1;
         return true;
+
+
+    }
+    public static char[] removeLetter(char[] letter, int index) {
+        if (letter == null || index < 0 || index >= letter.length) {
+            return letter;
+        }
+        char[] anotherArray = new char[letter.length - 1];
+        for (int i = 0, k = 0; i < letter.length; i++){
+                if (i == index) {
+                    continue;
+                }
+            anotherArray[k++] = letter[i];
+        }
+        return anotherArray;
     }
 
-//    public void Word() {
-//        Scanner keyboard = new Scanner(System.in);
-//        String word = keyboard.nextLine();
-//        int i = 0;
-//        if () {
-//            i++;
-//
+    public void storedInputs(String command) {
+        Scanner scan = new Scanner(System.in);
+        guessLetter = command;
+        //Decide the number of friends
+//         gues = Integer.parseInt(scan.nextLine());
+
+        //Create a string array to store the names of your friends
+//        String arrayOfNames[] = new String[numOfFriends];
+//        for (int i = 0; i < arrayOfNames.length; i++) {
+//            System.out.print("Enter the name of friend " + (i+1) + " : ");
+//            arrayOfNames[i] = scan.nextLine();
 //        }
-//    }
+    }
 
-    public void printStatus() {
-
+    public void printStatus(String command) {
+        System.out.println("**************");
         if (guess == 0) {
+
             System.out.println("You have not made any guesses yet.");
         } else {
             System.out.println("You have made " + guess + " guesses");
         }
-        System.out.println("Unused letters: abcdefghijklmnopqrstuvwxyz");
+
+        System.out.println("Unused letters:");
+        String[] alphabet = {"abcdefghijklmnopqrstuvwxyz"};
+        //removing a letter from the array
+        char[] unusedLetters    = {'a', 'b', 'c'};
+        System.out.println("Alphabet: " + Arrays.toString(unusedLetters));
+        String someLetter = command;
+        int index = Integer.valueOf(someLetter);
+        System.out.println(index);
+        System.out.println("index to be removed: " + index);
+        unusedLetters = removeLetter(unusedLetters, index);
+
+        System.out.println("Resultant Array: " + Arrays.toString(unusedLetters));
+
+
+
+
+//        char[] wChar = alphabet[0].toCharArray();
+//        char letter = 0;
+//        for (int i = 0; i < alphabet[0].length(); i++){
+//            letter = wChar[i];
+//            if (command.equals(letter)) {
+//                alphabet[letter] = alphabet[letter].replace(letter, ' ');
+//                System.out.print(alphabet[letter]);
+//            } else {
+//                System.out.print(letter);
+//
+//            }
+//        }
+        System.out.println();
+        System.out.println("***************");
     }
 
     public void guess(String command) {
 
-        String t = "?", e = "?", s = "?";
-        String word = t + e + s + t;
-//        int i = 0;
-
-        if (command.contains("t")) {
-            word = word.replace(t, "t"); //replace letters with '?'
-        }
-        if (command.equals("e")) {
-            e = command.replace("?", command); //replace letters with '?'
-        }
-        System.out.println(word);
-        System.out.println("the letter " + command + " is not in the word.");
+//        String t = "?", e = "?", s = "?";
+//        String word = t + e + s + t;
+////        int i = 0;
+//
+//        if (command.contains("t")) {
+//            word = word.replace("?", "t"); //replace letters with '?'
+//        }
+//        if (command.equals("e")) {
+//            e = command.replace("?", command); //replace letters with '?'
+//        }
+//        System.out.println(word);
+//        System.out.println("the letter " + command + " is not in the word.");
     }
 
     public void printMan() {
@@ -61,20 +109,29 @@ class Hangman {
     }
 
     public void printWord(String command) {
+    }
+
+        public void Word() {
+
+            Random randomWordSelector = new Random();
 
 
-        Random randomWordSelector = new Random();
+            final String[] word = new String[]{"test", "rest", "chest"}; //array
+            int i = randomWordSelector.nextInt(word.length); //select a word in the array
 
 
-        final String[] word = new String[]{"test", "rest", "chest"}; //array
-        int i = randomWordSelector.nextInt(word.length); //select a word in the array
+            word[i] = word[i].replaceAll(".",  "?"); //replace letters with '?'
+            //matching a letter in a string
 
+            for (char ch : word[i].toCharArray()) {
+                System.out.print(ch);
+//        Scanner keyboard = new Scanner(System.in);
+//        String word = keyboard.nextLine();
+//        int i = 0;
+//        if () {
+//            i++;
 
-        word[i] = word[i].replaceAll(".",  "?"); //replace letters with '?'
-         //matching a letter in a string
-
-        for (char ch : word[i].toCharArray()) {
-            System.out.print(ch);
+            }
         }
     }
-}
+
