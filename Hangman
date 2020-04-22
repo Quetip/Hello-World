@@ -17,29 +17,30 @@ public class HangmanGame {
         System.out.println("");
 
         int guesses = 0;
+
         while (hangman.gameOn()) {
-            String winnie ="the pooh";
             System.out.println();
             System.out.println("Type a command:");
             String command = reader.nextLine();
 
             if (command.equals("status")) {
-                hangman.printStatus();
+                hangman.printStatus(command);
             }
             if (command.isEmpty()) {
+                System.out.println("String was empty");
                 printMenu();
-            } else {
-                System.out.println("I found something!");
+//            } else if (command.length() == 1) {
+//                System.out.println("I found something!");
             }
             if(command.length() == 1) {  // command has only one letter, so it must be a guess
                 hangman.guess(command);
             }
             if (command.equals("quit")) {
-                System.out.println("Thank you for playing");
+                System.out.println("Thank you for playing!");
                 return;
             }
             hangman.printMan();
-            hangman.printWord();
+            hangman.printWord(command);
         }
     }
 
