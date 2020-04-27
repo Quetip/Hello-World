@@ -27,17 +27,17 @@ class Hangman {
         return anotherArray;
     }
 
-    public void storedInputs(String command) {
-        Scanner scan = new Scanner(System.in);
-        guessLetter = command;
-        //Decide the number of friends
-//         gues = Integer.parseInt(scan.nextLine());
+    public static char[] storeLetters(String letter) {
+        //store letters in an array
+        char[] storedUserInputs = new char[letter.length()];//array initialization
 
-        //Create a string array to store the names of your friends
-//        String arrayOfNames[] = new String[numOfFriends];
-//        for (int i = 0; i < arrayOfNames.length; i++) {
-//            System.out.print("Enter the name of friend " + (i+1) + " : ");
-//            arrayOfNames[i] = scan.nextLine();
+        for (int i = 0; i < letter.length(); i++){
+            storedUserInputs[i]= letter.charAt(i);
+            System.out.println(storedUserInputs);
+        }
+        return storedUserInputs;
+//        for (char c : storedUserInputs) {
+//            System.out.println(c);
 //        }
     }
 
