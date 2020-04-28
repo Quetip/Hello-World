@@ -1,5 +1,7 @@
 package com.company.Practise;
-
+//7 guesses
+//random word bank of at least 100 words
+//of course printed hangman
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Arrays;
@@ -10,8 +12,6 @@ class Hangman {
     boolean gameOn() {
         guess += 1;
         return true;
-
-
     }
     public static char[] removeLetter(char[] letter, int index) {
         if (letter == null || index < 0 || index >= letter.length) {
@@ -26,22 +26,50 @@ class Hangman {
         }
         return anotherArray;
     }
+    //get user inputs into an array
+    //cross check with unused letters
+    //remove unused letters
+    //prints remaining letters to be used again
 
     public static char[] storeLetters(String letter) {
-        //store letters in an array
-        char[] storedUserInputs = new char[letter.length()];//array initialization
+        if (letter.length() == 1) {
+            System.out.println("Unused letters:");
+            String[] alphabet = {"abcdefghijklmnopqrstuvwxyz"};
+            //removing a letter from the array
+            char[] unusedLetters = {'a', 'b', 'c'};
+            System.out.println("Alphabet: " + Arrays.toString(unusedLetters));
 
-        for (int i = 0; i < letter.length(); i++){
-            storedUserInputs[i]= letter.charAt(i);
-            System.out.println(storedUserInputs);
+            //get letter to remove from alphabet
+            char c = letter.charAt(0);
+            int index = Character.getNumericValue(c);
+            index = index - 10;
+            System.out.println("index to be removed: " + index);
+            //call to remove letter from alphabet
+            unusedLetters = removeLetter(unusedLetters, index);
+
+            System.out.println("Resultant Array: " + Arrays.toString(unusedLetters));
+            System.out.println();
+            System.out.println("***************");
+            return unusedLetters;
         }
-        return storedUserInputs;
-//        for (char c : storedUserInputs) {
-//            System.out.println(c);
-//        }
+        //store letters in an array
+        //char[] storedUserInputs = letter.length();//array initialization
+        char[] n = {};
+        for (int i = 0; i < letter.length(); i++) {
+
+            n = new char[letter.length()];
+
+            System.out.println(n);
+
+        }
+        return n;
     }
 
     public void printStatus(String command) {
+
+        //put commands through the alphabet
+        //get updated array
+
         System.out.println("**************");
         if (guess == 0) {
 
@@ -50,36 +78,9 @@ class Hangman {
             System.out.println("You have made " + guess + " guesses");
         }
 
-        System.out.println("Unused letters:");
-        String[] alphabet = {"abcdefghijklmnopqrstuvwxyz"};
-        //removing a letter from the array
-        char[] unusedLetters    = {'a', 'b', 'c'};
-        System.out.println("Alphabet: " + Arrays.toString(unusedLetters));
-        String someLetter = command;
-        int index = Integer.valueOf(someLetter);
-        System.out.println(index);
-        System.out.println("index to be removed: " + index);
-        unusedLetters = removeLetter(unusedLetters, index);
+//assigns a number to a letter: codeLetter = (char) ('A' + remainder)
+        //letters to use
 
-        System.out.println("Resultant Array: " + Arrays.toString(unusedLetters));
-
-
-
-
-//        char[] wChar = alphabet[0].toCharArray();
-//        char letter = 0;
-//        for (int i = 0; i < alphabet[0].length(); i++){
-//            letter = wChar[i];
-//            if (command.equals(letter)) {
-//                alphabet[letter] = alphabet[letter].replace(letter, ' ');
-//                System.out.print(alphabet[letter]);
-//            } else {
-//                System.out.print(letter);
-//
-//            }
-//        }
-        System.out.println();
-        System.out.println("***************");
     }
 
     public void guess(String command) {
