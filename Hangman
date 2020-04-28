@@ -22,10 +22,19 @@ public class HangmanGame {
             System.out.println();
             System.out.println("Type a command:");
             String command = reader.nextLine();
+            //function to return alphabet
+
+            char[] returnLetters = hangman.storeLetters(command);
+            System.out.println(returnLetters);
+
+            if (command.length() == 1) {
+                hangman.printStatus(command);
+            }
 
             if (command.equals("status")) {
                 hangman.printStatus(command);
             }
+
             if (command.isEmpty()) {
                 System.out.println("String was empty");
                 printMenu();
@@ -47,7 +56,7 @@ public class HangmanGame {
     public static void printMenu() {
         
         System.out.println(" * menu *");
-        System.out.println("quit  - quits the game");
+        System.out.println("quit - quits the game");
         System.out.println("status - prints the game status");
         System.out.println("a single letter uses the letter as a guess");
         System.out.println("an empty line prints this menu");
