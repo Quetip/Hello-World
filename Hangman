@@ -4,23 +4,21 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class HangmanGame {
-    public static String getWord;
 
     public static Random random = new Random();//function prototype
 
-    private static String[] wordList {
-        String[] arr={"rice","town","frighten","greatly","rubbed","balance",
-                "hard","held","atmosphere","game","sun","desk",
-                "president","corn","wise","sky","rocket","save",
-                "badly","doctor","drive","origin","nails","weight",
-                "sets","progress","simply","difficult","flat","century",
-                "suggest","yourself","atom","loud","tree","twelve",
-                "highest","silent","slabs","date","leather","satisfied"};
-    }
+    private static String wordList(String word)
 
-    private String getWord(String word) {
-
-        // word[random.nextInt(wordList.length)];
+    {
+        String[] arr = {"rice", "town", "frighten", "greatly", "rubbed", "balance",
+                "hard", "held", "atmosphere", "game", "sun", "desk",
+                "president", "corn", "wise", "sky", "rocket", "save",
+                "badly", "doctor", "drive", "origin", "nails", "weight",
+                "sets", "progress", "simply", "difficult", "flat", "century",
+                "suggest", "yourself", "atom", "loud", "tree", "twelve",
+                "highest", "silent", "slabs", "date", "leather", "satisfied"};
+        Random rand = new Random();
+        return word = arr[rand.nextInt(arr.length)];
     }
 
     private void printStatus() {
@@ -34,7 +32,8 @@ public class HangmanGame {
 
     private void guess(String letter) {
         String word = " ";
-        //char randomWord = getWord(word);
+        String randomWord = wordList(word);
+        randomWord.split("(?!^)");
 
         if(letter.isEmpty()) {
             System.out.println("String was empty");
@@ -42,15 +41,12 @@ public class HangmanGame {
         } else {
             System.out.println("I found something!");
         }
-        if (letter == letter) {
-            System.out.println("The letter" + letter + "is not in the word.");
+        if (randomWord.contains(letter)) {
+            System.out.println("The letter " + letter + " was found in the word!");
         } else {
-            System.out.println("The letter" + letter + " was found in the word!");
+            System.out.println("The letter " + letter + " is not in the word.");
         }
-        String winnie = "the pooh";
-
     }
-
 
     public static void printMenu() {
         System.out.println(" * menu *");
@@ -63,7 +59,6 @@ public class HangmanGame {
     public static void main(String[] args) {
         Scanner reader = new Scanner(System.in);
         HangmanGame hangman = new HangmanGame();
-
 
         System.out.println("************");
         System.out.println("* Hangman *");
@@ -89,8 +84,4 @@ public class HangmanGame {
         }
     }
 }
-
-
-
-
 
