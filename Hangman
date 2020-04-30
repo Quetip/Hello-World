@@ -1,14 +1,96 @@
 package com.company.Practise;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class HangmanGame {
+    public static String getWord;
+
+    public static Random random = new Random();//function prototype
+
+    private static String[] wordList {
+        String[] arr={"rice","town","frighten","greatly","rubbed","balance",
+                "hard","held","atmosphere","game","sun","desk",
+                "president","corn","wise","sky","rocket","save",
+                "badly","doctor","drive","origin","nails","weight",
+                "sets","progress","simply","difficult","flat","century",
+                "suggest","yourself","atom","loud","tree","twelve",
+                "highest","silent","slabs","date","leather","satisfied"};
+    }
+
+    private String getWord(String word) {
+
+        // word[random.nextInt(wordList.length)];
+    }
+
+    private void printStatus() {
+        System.out.println("You have not made any guesses yet.");
+        System.out.println("Unused letters: abcdefghijklmnopqrstuvxyz");
+    }
+
+    public boolean gameOn() {
+        return true;
+    }
+
+    private void guess(String letter) {
+        String word = " ";
+        //char randomWord = getWord(word);
+
+        if(letter.isEmpty()) {
+            System.out.println("String was empty");
+            printMenu();
+        } else {
+            System.out.println("I found something!");
+        }
+        if (letter == letter) {
+            System.out.println("The letter" + letter + "is not in the word.");
+        } else {
+            System.out.println("The letter" + letter + " was found in the word!");
+        }
+        String winnie = "the pooh";
+
+    }
+
+
+    public static void printMenu() {
+        System.out.println(" * menu *");
+        System.out.println("quit   - quits the game");
+        System.out.println("status  - prints the game status");
+        System.out.println("a single letter uses the letter as a guess");
+        System.out.println("an empty line prints this menu");
+    }
 
     public static void main(String[] args) {
-        hangman.gameOn();
-        hangman.printStatus();
-        hangman.printword();
-        hangman.printMan();
-        hangman.guess(String letter);
+        Scanner reader = new Scanner(System.in);
+        HangmanGame hangman = new HangmanGame();
+
+
+        System.out.println("************");
+        System.out.println("* Hangman *");
+        System.out.println("************");
+        System.out.println("");
+        printMenu();
+        System.out.println("");
+
+        while (hangman.gameOn()) {
+            System.out.println("Type a command:");
+            String command = reader.nextLine();
+
+            if (command.equals("status")) {
+                hangman.printStatus();
+            }
+            if (command.equals("quit")) {
+                System.out.println("Thanks for playing");
+            }
+            if(command.length() == 1) {  // command has only one letter, so it must be a guess
+                hangman.guess(command);
+            }
+
+        }
     }
 }
+
+
+
+
+
