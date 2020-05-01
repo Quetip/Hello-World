@@ -1,14 +1,17 @@
 package com.company.Practise;
 
+import javax.sound.midi.Soundbank;
 import java.util.Random;
 import java.util.Scanner;
 
 public class HangmanGame {
 
     public static Random random = new Random();//function prototype
-
+    private String wordConnect;
+    //word bank
+    public char[] wordFound;
+    //public static winCheck;
     private static String wordList(String word)
-
     {
         String[] arr = {"rice", "town", "frighten", "greatly", "rubbed", "balance",
                 "hard", "held", "atmosphere", "game", "sun", "desk",
@@ -21,31 +24,57 @@ public class HangmanGame {
         return word = arr[rand.nextInt(arr.length)];
     }
 
-    private void printStatus() {
-        System.out.println("You have not made any guesses yet.");
-        System.out.println("Unused letters: abcdefghijklmnopqrstuvxyz");
-    }
-
-    public boolean gameOn() {
-        return true;
-    }
-
-    private void guess(String letter) {
+    public String grabWord() {
         String word = " ";
         String randomWord = wordList(word);
-        randomWord.split("(?!^)");
 
+        //??
+        wordFound = new char[randomWord.length()];
+        char[] ch = new char[randomWord.length()];
+        for (int i = 0; i < randomWord.length(); i++) {
+            ch[i] = '?';
+        }
+
+        randomWord.split("(?!^)");
+        return randomWord;
+    }
+//    public String wordToGuess();
+
+    public boolean wordFound(){
+        return wordConnect.contentEquals(new String(wordFound));
+    }
+
+    public static void winCheck(String[] fullWord) {
+        for (int x=0; x < fullWord.length; x++)
+            if (x == fullWord.length - 1){
+                System.out.println("You Win!");
+            }
+    }
+
+    private void guess(String letter, String word) {
         if(letter.isEmpty()) {
             System.out.println("String was empty");
             printMenu();
-        } else {
-            System.out.println("I found something!");
-        }
-        if (randomWord.contains(letter)) {
+        } else if (word.contains(letter)) {
+            System.out.println(word);
+            //??
+            int wordIndex = word.indexOf(letter);//gets number for word index
+            while (wordIndex >= 0) {
+                wordFound[wordIndex] = letter.charAt(0);//places number in arrays index
+                wordIndex = word.indexOf(letter, wordIndex + 1);
+            }
+            //replaceLetter(letter, []word);
             System.out.println("The letter " + letter + " was found in the word!");
+            System.out.println(wordFound);
+            //winCheck(wordFound);
         } else {
             System.out.println("The letter " + letter + " is not in the word.");
         }
+    }
+
+    private void printStatus() {
+        System.out.println("You have not made any guesses yet.");
+        System.out.println("Unused letters: abcdefghijklmnopqrstuvxyz");
     }
 
     public static void printMenu() {
@@ -54,6 +83,18 @@ public class HangmanGame {
         System.out.println("status  - prints the game status");
         System.out.println("a single letter uses the letter as a guess");
         System.out.println("an empty line prints this menu");
+    }
+
+    public boolean gameOn() {
+        return true;
+    }
+
+    public static void printMan() {
+        System.out.println("____");
+        System.out.println("|    |");
+        System.out.println("|");
+        System.out.println("|");
+        System.out.println("/|\\");
     }
 
     public static void main(String[] args) {
@@ -67,7 +108,13 @@ public class HangmanGame {
         printMenu();
         System.out.println("");
 
-        while (hangman.gameOn()) {
+        //word to get from word bank
+        String getWord = hangman.grabWord();
+
+        //hangman.wordToGuess();
+        int guesses = 0;
+        //loop to call functions
+        while (hangman.gameOn() && guesses <=7) {
             System.out.println("Type a command:");
             String command = reader.nextLine();
 
@@ -77,11 +124,16 @@ public class HangmanGame {
             if (command.equals("quit")) {
                 System.out.println("Thanks for playing");
             }
-            if(command.length() == 1) {  // command has only one letter, so it must be a guess
-                hangman.guess(command);
+            if (command.length() == 1) {  // command has only one letter, so it must be a guess
+                hangman.guess(command, getWord);
             }
 
+            if (command.length() == 1) {
+                hangman.printMan();
+            }
+            guesses++;
         }
+        System.out.println("game over!");
+        reader.close();
     }
 }
-
