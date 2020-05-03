@@ -6,12 +6,10 @@ import java.util.Scanner;
 public class HangmanGame {
 
     public static Random random = new Random();//function prototype
-    private static char[] wordFound;
-    private String wordConnect;
-    //word bank
-    //public char[] wordFound;
-    //public static printMan;
-    //public static winCheck;
+    private static char[] wordPicked;
+    public static String main;
+    private static int winCheck; //instance member to add one point to each method call of guess.
+
     private static String wordList(String word)
     {
         String[] arr = {"rice", "town", "frighten", "greatly", "rubbed", "balance",
@@ -29,55 +27,48 @@ public class HangmanGame {
         String word = "";
         String randomWord = wordList(word);
 
-        //??
-        wordFound = new char[randomWord.length()];
-        char[] ch = new char[randomWord.length()];
-        for (int i = 0; i < randomWord.length(); i++) {
-            ch[i] = '?';
+        wordPicked = new char[randomWord.length()];
+        for (int i = 0; i < wordPicked.length; i++) {
+            wordPicked[i] = '?';
+            if (wordPicked[i] == wordPicked.length) {
+                System.out.println("You Win!");
+                System.exit(0);
+            }
         }
 
-        randomWord.split("(?!^)");
-        for (int i = 0; i < wordFound.length; i++) {
-            wordFound[i] = '_';
-        }
+        System.out.print("Word to guess: ");
+        System.out.println(wordPicked);
+
         return randomWord;
     }
-//    public String wordToGuess();
 
-    public boolean wordFound(){
-        return wordConnect.contentEquals(new String(wordFound));
-    }
-    public void printMan() {
-
-    }
-    public static void winCheck(String[] fullWord) {
-        for (int x=0; x < fullWord.length; x++)
-            if (x == fullWord.length - 1){
-                System.out.println("You Win!");
-            }
+    public static int winCheck(int test) {
+        test++;
+        return test;
     }
 
     public static int guess(String letter, String word, int errors) {
+        int length = word.length();
         if  (letter == null) {
             System.out.println("String was empty");
             printMenu();
         }
         if (word.contains(letter)) {
-            //??
+            winCheck++;
+            //letter check and replacement
             int wordIndex = word.indexOf(letter);//gets number for word index
             while (wordIndex >= 0) {
-                wordFound[wordIndex] = letter.charAt(0);//places number in arrays index
+                wordPicked[wordIndex] = letter.charAt(0);//places number in arrays index
                 wordIndex = word.indexOf(letter, wordIndex + 1);
             }
-            //replaceLetter(letter, []word);
             System.out.println("The letter " + letter + " was found in the word!");
-            System.out.println(wordFound);
+            System.out.println(wordPicked);
             printMan(errors);
-            //winCheck(wordFound);
         } else {
             System.out.println("The letter " + letter + " is not in the word.");
             errors++;
             printMan(errors);
+            System.out.println(wordPicked);
         }
         return errors;
     }
@@ -102,10 +93,10 @@ public class HangmanGame {
     public boolean gameOn() {
         return true;
     }
-
+    //print man
     public static void printMan(int wrongGuess) {
         System.out.println(" _____");
-        System.out.println("|     I");
+        System.out.println("|     |");
 
         if (wrongGuess >= 1 && wrongGuess <5) {
             System.out.print("|   (u_u)\n");
@@ -121,7 +112,6 @@ public class HangmanGame {
         } else if (wrongGuess >= 3) {
                 System.out.println("|    /|\\");
             }
-
         if (wrongGuess < 3) {
             System.out.println("|");
         }
@@ -142,7 +132,6 @@ public class HangmanGame {
         }
         System.out.println("|");
         System.out.println("┴");
-        //return wrongGuess;
     }
 
     public static void main(String[] args) {
@@ -160,12 +149,12 @@ public class HangmanGame {
         String getWord = hangman.grabWord();
 
         //hangman.wordToGuess();
-        int errors = 0, guesses = 0;
+        int errors = 0, guesses = 0, correctCheck = 0;
         String alphabet = new String ("abcdefghijklmnopqrstuvxyz");
 
         //loop to call functions
         while (hangman.gameOn() && errors < 7) {
-            System.out.println("Type a command:");
+            System.out.print("Type a command: ");
             String command = reader.nextLine();
             alphabet = alphabet.replace(command, "");
 
@@ -177,15 +166,16 @@ public class HangmanGame {
             }
             if (command.length() == 1) {  // command has only one letter, so it must be a guess
                errors = hangman.guess(command, getWord, errors);
+                //win check
+                if (winCheck == getWord.length()){
+                   System.out.println("You Win!");
+                   System.exit(0);
+               }
             }
-            if (command.length() == 1) {
-                //int returnErrors = hangman.printMan(errors);
-            }
-
             guesses++;
         }
-        System.out.println("The word was " + getWord + "!");
-        System.out.println("game over!");
-        reader.close();
+        System.out.println("The word was " + getWord);
+        System.out.println("Game Over!");
+        System.exit(0);
     }
 }
