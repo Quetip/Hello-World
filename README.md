@@ -1,2 +1,2 @@
 # Hello-World
-These are my first programming projects as I'm learning to code. Main interests are video games
+Begginning programming projects as while learning to code. Video game hobbyist
